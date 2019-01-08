@@ -1,36 +1,43 @@
-import { Response } from '@angular/http';
-import { GuestService } from './services/guest.services';
-import Guest from './models/guest.models';
 import { Component, OnInit } from '@angular/core';
+import Guest from '../models/guest.models';
+import { GuestService } from '../services/guest.services';
+
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: 'app-guest',
+  templateUrl: './guest.component.html',
+  styleUrls: ['./guest.component.scss']
 })
-export class AppComponent implements OnInit { 
+export class GuestComponent implements OnInit {
 
   constructor(
 
-    //private guestService: GuestService
+    private guestService: GuestService
   ) { }
-  
-  //public newGuest: Guest = new Guest();
-  //public guestsList: Guest[] = [];
-  //public editGuests: Guest[] = [];
-  
-  ngOnInit(){
 
+  public newGuest: Guest = new Guest();
+  guestsList: Guest[] = [];
+  editGuests: Guest[] = [];
+
+  ngOnInit(): void {
+
+    //At component initialization the 
+    this.guestService.getGuests()
+      .subscribe(guests => {
+        //assign the todolist property to the proper http response
+        this.guestsList = guests
+       // console.log(guests)
+      })
   }
 
-  //This method will get called on Create button event
-  
-  /*
   create() {
     this.guestService.createGuest(this.newGuest)
       .subscribe((res) => {
         this.guestsList.push(res.data)
         this.newGuest = new Guest()
+      }, err => {
+        this.newGuest = new Guest()
+        console.error('Create Unsuccesful')
       })
   }
 
@@ -60,15 +67,17 @@ export class AppComponent implements OnInit {
         console.error('Update Unsuccesful')
       })
     }
+
     submitGuest(event, guest:Guest){
       if(event.keyCode ==13){
         this.editGuest(guest)
       }
     }
+
     deleteGuest(guest: Guest) {
       this.guestService.deleteGuest(guest._id).subscribe(res => {
         this.guestsList.splice(this.guestsList.indexOf(guest), 1);
       })
     }
-    */
+
 }

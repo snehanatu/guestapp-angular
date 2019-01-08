@@ -1,0 +1,87 @@
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-10">
+    <form>
+      <div class="form-row">
+        <div class="col-md-4">
+          <input type="text" name="name" id="name" [(ngModel)]="newGuest.name" placeholder="Name" class="form-control">
+        </div>
+        <div class="col-md-4">
+            <input type="text" name="roomSize" id="roomSize" [(ngModel)]="newGuest.roomSize" placeholder="roomSize" class="form-control">
+         </div>
+         <div class="col-md-4">
+            <input type="text" name="roomNum" id="roomNum" [(ngModel)]="newGuest.roomNum" placeholder="roomNum" class="form-control">
+         </div>
+         <div class="col-md-4">
+            <input type="text" name="payment" id="payment" [(ngModel)]="newGuest.payment" placeholder="payment" class="form-control">
+         </div> 
+        <div class="col-md-4">
+            <input type="text" name="numNight" id="numNight" [(ngModel)]="newGuest.numNight" placeholder="numNight" class="form-control">
+         </div>
+                <div class="col-md-1">
+          <button type="submit" class="btn btn-primary" (click)="create()">Add</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="col-md-1"></div>
+</div>
+<br />
+<table class="table">
+<thead class="h">
+  <tr class="h">
+    <th class="h">Name</th>
+    <th class="h">RoomSize</th>
+    <th class="h">RoomNum</th>
+    <th class="h">Payment</th>
+    <th class="h">NumNight</th>
+    <th class="h">Date</th>
+    <th class="h">Status</th>
+    
+  </tr>
+</thead>
+<tbody>
+  <tr class="guest" (dblclick)="editGuest(guest)" *ngFor="let guest of guestsList">
+
+    <ng-container *ngIf="!editGuests.includes(guest); else editTD">
+      <td>{{guest.name}}</td>
+      <td>{{guest.roomSize}}</td>
+      <td>{{guest.roomNum}}</td>
+      <td>{{guest.payment}}</td>
+      <td>{{guest.numNight}}</td>
+      <td>{{guest.date | date}}</td>
+      <td>{{guest.status}}</td>
+    </ng-container>
+
+    <ng-template #editTD>
+      
+        <td><input type="text" name="title" id="name" (keypress)="submitGuest($event, guest)" [(ngModel)]="guest.name" placeholder="Name" class="form-control"></td>
+        <td><input type="text" name="roomSize" id="roomSize" (keypress)="submitGuest($event, guest)" [(ngModel)]="guest.roomSize" placeholder="roomSize"
+            class="form-control"></td>
+        <td><input type="text" name="roomNum" id="roomNum" (keypress)="submitGuest($event, guest)" [(ngModel)]="guest.roomNum" placeholder="roomNum"
+            class="form-control"></td>	
+        <td><input type="text" name="payment" id="payment" (keypress)="submitGuest($event, guest)" [(ngModel)]="guest.payment" placeholder="payment"
+            class="form-control"></td>	
+        <td><input type="text" name="numNight" id="numNight" (keypress)="submitGuest($event, guest)" [(ngModel)]="guest.numNight" placeholder="numNight"
+            class="form-control"></td>	
+        <td>{{guest.date | date}}</td>
+        <td>
+          <input type="text" name="status" id="status" (keypress)="submitGuest($event, guest)" [(ngModel)]="guest.status" placeholder="Status" class="form-control">
+        </td>
+    </ng-template>
+
+    <td class="o">
+      <button class="btn btn-success" (click)="doneGuest(guest)">
+        <i  class="fa fa-check"></i>
+      </button>
+      <button class="btn btn-primary" (click)="editGuest(guest)">
+          <i  class="fa fa-pencil"></i>
+        </button>
+      <button class="btn btn-danger" (click)="deleteGuest(guest)">
+          <i  class="fa fa-trash"></i>
+        </button>
+    </td>
+
+  </tr>
+</tbody>
+</table>
