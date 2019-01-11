@@ -23,7 +23,7 @@ createGuest(guest: Guest): Observable<any>{
   }
 
 
-//Read todo, takes no arguments
+//Read guest, takes no arguments
 getGuests(): Observable<Guest[]>{
     return this.http.get(this.guestUrl)
     .pipe(map(res  => {

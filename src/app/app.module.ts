@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { NavComponent } from './nav/nav.component';
 import { GuestComponent } from './guest/guest.component';
 import { AboutComponent } from './about/about.component';
+import { GuestHistoryComponent } from './guesthistory/guesthistory.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { AboutComponent } from './about/about.component';
     HomeComponent,
     NavComponent,
     GuestComponent,
-    AboutComponent
+    AboutComponent,
+    GuestHistoryComponent
   ],
   imports: [
     BrowserModule,
@@ -29,5 +31,4 @@ import { AboutComponent } from './about/about.component';
   ],
   providers: [GuestService],
   bootstrap: [AppComponent]
-})
-export class AppModule { }
+})export class AppModule { }

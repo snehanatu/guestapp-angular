@@ -24,7 +24,7 @@ export class GuestComponent implements OnInit {
     //At component initialization the 
     this.guestService.getGuests()
       .subscribe(guests => {
-        //assign the todolist property to the proper http response
+        //assign the guestlist property to the proper http response
         this.guestsList = guests
        // console.log(guests)
       })
